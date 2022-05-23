@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { ProductService } from "./../../../../shared/services/product.service";
 
 import { ThemeService } from "src/app/shared/services/theme.service";
+import {AuthService} from "../../../../shared/services/auth.service";
 declare var $: any;
 
 @Component({
@@ -53,7 +54,8 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     public productService: ProductService,
     public translate: TranslateService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    public authService: AuthService
   ) {
     // console.log(translate.data);
   }

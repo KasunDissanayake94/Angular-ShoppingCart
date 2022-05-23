@@ -79,71 +79,13 @@
           </a>
         </div>
       </li>
-      <!-- <li class="nav-item" *ngIf="authService.isLoggedIn$ | async">
+      <li class="nav-item" *ngIf="authService.isLoggedIn$ | async">
         <a class="nav-link" [routerLink]="['/users']">
           <i class="fa fa-user mr-1"></i
           >{{ this.translate.data["MYACCOUNT"] | translate }}</a
         >
-      </li> -->
-
-      <li class="nav-item dropdown" dropdown>
-        <a
-          dropdownToggle
-          type="button"
-          class="nav-link dropdown-toggle waves-light"
-        >
-          <i class="fa fa-paint-brush"> </i><span class="caret"></span
-        ></a>
-        <div
-          *dropdownMenu
-          class="dropdown-menu dropdown dropdown-primary color-dropdown"
-          role="menu"
-        >
-          <div class="row p-2" style="margin: 0;">
-            <ng-container
-              *ngFor="let theme of colorPallet1"
-              [ngTemplateOutlet]="themeTemplate"
-              [ngTemplateOutletContext]="{
-                item: theme
-              }"
-            ></ng-container>
-          </div>
-          <div class="row p-2" style="margin: 0;">
-            <ng-container
-              *ngFor="let theme of colorPallet2"
-              [ngTemplateOutlet]="themeTemplate"
-              [ngTemplateOutletContext]="{
-                item: theme
-              }"
-            ></ng-container>
-          </div>
-        </div>
       </li>
-      <li class="nav-item dropdown" dropdown>
-        <a
-          dropdownToggle
-          type="button"
-          class="nav-link dropdown-toggle waves-light"
-        >
-          <i class="fa fa-globe"> </i><span class="caret"></span
-        ></a>
-        <div
-          *dropdownMenu
-          class="dropdown-menu dropdown dropdown-primary"
-          role="menu"
-        >
-          <a
-            class="dropdown-item waves-light"
-            href="javascript:;;"
-            (click)="setLang(lang.langCode)"
-            *ngFor="let lang of languageList"
-          >
-            <i class="fa fa-flag-o mr-2"></i>
-            {{ lang.language }} ({{ lang.langCode }})</a
-          >
-        </div>
-      </li>
-      <!-- <li class="nav-item" *ngIf="authService.isLoggedOut$ | async">
+      <li class="nav-item" *ngIf="authService.isLoggedOut$ | async">
         <a class="nav-link" [routerLink]="['/login']">
           <i class="fa fa-sign-in mr-1"></i>
           {{ this.translate.data["SIGNIN"] | translate }}</a
@@ -154,11 +96,9 @@
           <i class="fa fa-sign-in mr-1"></i
           >{{ this.translate.data["LOGOUT"] | translate }}</a
         >
-      </li> -->
+      </li>
       <li class="nav-item">
-        <a href="javascript:;;" class="nav-link"
-          >Angular v-{{ angularVersion.full }}</a
-        >
+
       </li>
     </ul>
   </div>

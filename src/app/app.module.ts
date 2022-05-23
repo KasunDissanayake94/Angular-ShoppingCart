@@ -14,6 +14,10 @@ import { ProductModule } from "./views/pages/product/product.module";
 import { UserModule } from "./views/pages/user/user.module";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
+import {AngularFireDatabaseModule} from "@angular/fire/database";
+import {AngularFireModule} from "@angular/fire";
+import {FireBaseConfig} from "../environments/firebase.config";
+import {AuthService} from "./shared/services/auth.service";
 
 /* to load and set en.json as the default application language */
 export function setupTranslateFactory(service: TranslateService) {
@@ -33,10 +37,11 @@ export function setupTranslateFactory(service: TranslateService) {
       enabled: environment.production,
       registrationStrategy: "registerImmediately",
     }),
-    // AngularFireModule.initializeApp(FireBaseConfig),
-    // AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(FireBaseConfig),
+    AngularFireDatabaseModule,
   ],
   providers: [
+    AuthService,
     TranslateService,
     {
       provide: APP_INITIALIZER,
