@@ -50,12 +50,11 @@ export class NavbarComponent implements OnInit {
   ];
 
   constructor(
-    // public authService: AuthService,
+    public authService: AuthService,
     private router: Router,
     public productService: ProductService,
     public translate: TranslateService,
     private themeService: ThemeService,
-    public authService: AuthService
   ) {
     // console.log(translate.data);
   }

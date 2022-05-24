@@ -7,6 +7,7 @@ import {
 import { Product } from "../models/product";
 // import { AuthService } from "./auth.service";
 import { ToastrService } from "./toastr.service";
+import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 
 @Injectable()
 export class ProductService {
@@ -20,12 +21,13 @@ export class ProductService {
   constructor(
     private db: AngularFireDatabase,
     // private authService: AuthService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private fbs: AngularFirestore
   ) {}
 
-  getProducts() {
-    this.products = this.db.list("products");
-    return this.products;
+
+  getProducts(): AngularFirestoreCollection<Product> {
+    return this.fbs.collection("test_products");
   }
 
   createProduct(data: Product, callback: () => void) {
@@ -34,8 +36,8 @@ export class ProductService {
   }
 
   getProductById(key: string) {
-    this.product = this.db.object("products/" + key);
-    return this.product;
+
+    return this.fbs.collection("test_products/" + key);
   }
 
   updateProduct(data: Product) {

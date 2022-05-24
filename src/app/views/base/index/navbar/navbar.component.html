@@ -79,7 +79,7 @@
           </a>
         </div>
       </li>
-      <li class="nav-item" *ngIf="authService.isLoggedIn$ | async">
+      <li class="nav-item" *ngIf="authService.isLoggedOut$ | async">
         <a class="nav-link" [routerLink]="['/users']">
           <i class="fa fa-user mr-1"></i
           >{{ this.translate.data["MYACCOUNT"] | translate }}</a

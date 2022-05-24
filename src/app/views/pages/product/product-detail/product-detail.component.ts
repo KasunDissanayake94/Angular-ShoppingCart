@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ProductService } from "../../../../shared/services/product.service";
 import { ToastrService } from "src/app/shared/services/toastr.service";
+import {map} from "rxjs/operators";
 @Component({
   selector: "app-product-detail",
   templateUrl: "./product-detail.component.html",
@@ -28,16 +29,27 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   getProductDetail(id: string) {
-    const x = this.productService.getProductById(id);
-    x.snapshotChanges().subscribe(
-      (product) => {
-        const y = { ...(product.payload.toJSON() as Product), $key: id };
-        this.product = y;
-      },
-      (error) => {
-        this.toastrService.error("Error while fetching Product Detail", error);
-      }
-    );
+    this.productService.getProducts().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      console.log(data);
+      this.product = data[0];
+    });
+
+    // const x = this.productService.getProductById(id);
+    // x.snapshotChanges().subscribe(
+    //   (product) => {
+    //     const y = { ...(product.payload.toJSON() as Product), $key: id };
+    //     this.product = y;
+    //   },
+    //   (error) => {
+    //     this.toastrService.error("Error while fetching Product Detail", error);
+    //   }
+    // );
   }
 
   addToCart(product: Product) {
