@@ -31,6 +31,8 @@ export class AuthService {
   isAdmin$: Observable<boolean> = this.user$.pipe(
     map((user) => !!user.isAdmin)
   );
+  loggedIn = new BehaviorSubject<boolean>(false);
+  loggedIn$ = this.loggedIn.asObservable();
 
   constructor(
     private firebaseAuth: AngularFireAuth,
@@ -39,8 +41,16 @@ export class AuthService {
   ) {
     this.user = firebaseAuth.authState;
 
+    this.firebaseAuth.onAuthStateChanged((user) => {
+      if (user) {
+        this.loggedIn.next(true);
+      } else {
+        // not logged in
+        this.loggedIn.next(false);
+      }
+    });
+
     this.user.subscribe((user) => {
-      console.log({ user });
       if (user) {
         this.userService
           .isAdmin(user.email)
@@ -68,6 +78,10 @@ export class AuthService {
         this.subject.next(ANONYMOUS_USER);
       }
     });
+  }
+
+  public isLoggedIn(): boolean {
+    return !!this.firebaseAuth.currentUser;
   }
 
   logout() {

@@ -41,11 +41,12 @@ export class ProductService {
   }
 
   updateProduct(data: Product) {
-    this.products.update(data.$key, data);
+    this.fbs.doc("test_products/" + data.$key).update(data);
   }
 
   deleteProduct(key: string) {
     this.products.remove(key);
+    this.fbs.doc("test_products/" + key).delete();
   }
 
   /*

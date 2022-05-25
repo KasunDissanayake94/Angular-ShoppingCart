@@ -3,6 +3,7 @@ import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 
 import * as moment from "moment";
 import { User } from "../models/user";
+import {AngularFirestore} from "@angular/fire/firestore";
 
 @Injectable()
 export class UserService {
@@ -14,7 +15,7 @@ export class UserService {
     lon: null,
   };
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, private fbs: AngularFirestore ) {
     this.getUsers();
   }
 
@@ -26,13 +27,7 @@ export class UserService {
   getUserById(id: string) {}
 
   createUser(data: any) {
-    const updatedData = {
-      ...data,
-      location: this.location,
-      createdOn: moment(new Date()).format("X"),
-      isAdmin: false,
-    };
-    this.users.push(updatedData);
+    return this.fbs.collection("test_users").add(data);
   }
 
   isAdmin(emailId: string) {
