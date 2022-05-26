@@ -84,6 +84,10 @@ export class AuthService {
     return !!this.firebaseAuth.currentUser;
   }
 
+  public getUid() {
+    return this.firebaseAuth.currentUser;
+  }
+
   logout() {
     this.firebaseAuth.signOut().then((res) => {
       this.subject.next(ANONYMOUS_USER);

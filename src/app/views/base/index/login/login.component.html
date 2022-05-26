@@ -24,7 +24,7 @@
         />
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
+        <label for="password">Password</label>
         <input
           type="password"
           class="form-control"
@@ -112,12 +112,54 @@
                 [(ngModel)]="createUser.emailId"
                 placeholder="Enter email"
                 mdbInputValidate
+                autocomplete="email"
+              />
+            </div>
+            <div class="form-group form-sm">
+              <label for="firstName">Your First Name</label>
+              <input
+                mdbActive
+                type="type"
+                id="firstName"
+                class="form-control"
+                name="firstName"
+                [(ngModel)]="detailedUser.firstName"
+                placeholder="Enter First Name"
+                mdbInputValidate
+                autocomplete="email"
+              />
+            </div>
+            <div class="form-group form-sm">
+              <label for="lastName">Your Last Name</label>
+              <input
+                mdbActive
+                type="text"
+                id="lastName"
+                class="form-control"
+                name="lastName"
+                [(ngModel)]="detailedUser.lastName"
+                placeholder="Enter Last Name"
+                mdbInputValidate
                 [email]="true"
                 autocomplete="email"
               />
             </div>
             <div class="form-group form-sm">
-              <label for="password">password</label>
+              <label for="phoneNumber">Phone Number</label>
+              <input
+                mdbActive
+                type="text"
+                id="phoneNumber"
+                class="form-control"
+                name="phoneNumber"
+                [(ngModel)]="detailedUser.phoneNumber"
+                placeholder="Enter Phone Number"
+                mdbInputValidate
+                autocomplete="phoneNumber"
+              />
+            </div>
+            <div class="form-group form-sm">
+              <label for="password">Password</label>
               <input
                 mdbActive
                 type="password"

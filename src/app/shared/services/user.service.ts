@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 
 import * as moment from "moment";
-import { User } from "../models/user";
+import {User, UserDetail} from "../models/user";
 import {AngularFirestore} from "@angular/fire/firestore";
 
 @Injectable()
@@ -20,14 +20,20 @@ export class UserService {
   }
 
   getUsers() {
-    this.users = this.db.list("clients");
+    this.users = this.db.list("test_users");
     return this.users;
   }
 
-  getUserById(id: string) {}
+  getUserById(id: string) {
+    // return this.firestore
+    //   .doc("test_users"+ id);
 
-  createUser(data: any) {
-    return this.fbs.collection("test_users").add(data);
+  }
+
+  createUser(data: UserDetail) {
+    console.log(data);
+    // return this.fbs.collection("test_users").add(JSON.stringify(data));
+    return this.fbs.collection("test_users").add({ ...data });
   }
 
   isAdmin(emailId: string) {

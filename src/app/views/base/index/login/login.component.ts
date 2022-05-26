@@ -4,7 +4,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from "../../../../shared/services/user.service";
 // import { AuthService } from "../../../../shared/services/auth.service";
-import { User } from "../../../../shared/models/user";
+import {User, UserDetail} from "../../../../shared/models/user";
 import {AuthService} from "../../../../shared/services/auth.service";
 declare var $: any;
 @Component({
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   errorInUserCreate = false;
   errorMessage: any;
   createUser;
+  detailedUser = new UserDetail();
 
   constructor(
     // private authService: AuthService,
@@ -44,15 +45,17 @@ export class LoginComponent implements OnInit {
         userForm.value.password
       )
       .then((res) => {
-        const user = {
-          email: res.user.email,
-          famil_name: res.user.displayName,
-          uid: res.user.uid,
-          verified_email: res.user.emailVerified,
-          phoneNumber: res.user.phoneNumber,
-          picture: res.user.photoURL,
-        };
-        this.userService.createUser(user);
+        // const user = {
+        //   email: res.user.email,
+        //   famil_name: res.user.displayName,
+        //   uid: res.user.uid,
+        //   verified_email: res.user.emailVerified,
+        //   phoneNumber: res.user.phoneNumber,
+        //   picture: res.user.photoURL,
+        // };
+        this.detailedUser.$key = res.user.uid;
+        this.detailedUser.emailId = this.createUser.emailId;
+        this.userService.createUser(this.detailedUser);
         this.toastService.success("Registering", "User Registeration");
         setTimeout((router: Router) => {
           $("#createUserForm").modal("hide");

@@ -21,6 +21,7 @@ export class UserDetail {
   emailId: string;
   address1: string;
   address2: string;
+  phoneNumber: string;
   country: string;
   state: string;
   zip: number;
